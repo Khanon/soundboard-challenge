@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 
 import { SoundData } from '../../models/sound-data';
 import { SoundControllerService } from '../../services/sound-controller.service';
@@ -96,6 +97,11 @@ export class SoundBoardComponent implements OnInit {
     },
   ];
   soundSelected: SoundData;
+
+  selectorColor: ThemePalette = 'primary';
+
+  selectorShortcuts = false;
+  selectorMute = false;
 
   constructor(private soundController: SoundControllerService) {}
 
