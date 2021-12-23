@@ -1,27 +1,29 @@
-import { Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+
 import { ApiService } from './api.service';
+import { SoundData } from '../models/sound-data';
 
 @Controller()
 export class ApiController {
-  constructor(private readonly appService: ApiService) {}
+  constructor(private readonly apiService: ApiService) {}
 
   @Post('/sounds')
-  postSounds(): string {
-    return this.appService.postSounds();
+  postSounds(@Body() data: SoundData[]): void {
+    this.apiService.postSounds(data);
   }
 
   @Get('/sounds')
-  getSounds(): string {
-    return this.appService.getSounds();
+  getSounds(): SoundData[] {
+    return this.apiService.getSounds();
   }
 
   @Get('/sounds/:soundId')
-  getSoundDetails(@Param('soundId') soundId: number): string {
-    return this.appService.getSoundDetails(soundId);
+  getSoundDetails(@Param('soundId') soundId: string): SoundData {
+    return this.apiService.getSoundDetails(Number(soundId));
   }
 
   @Put('/sounds/:soundId/play')
-  playSound(@Param('soundId') soundId: number): string {
-    return this.appService.playSound(soundId);
+  playSound(@Param('soundId') soundId: string): void {
+    this.apiService.playSound(Number(soundId));
   }
 }

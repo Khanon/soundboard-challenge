@@ -34,7 +34,34 @@
     </button>
   </section>
 </div>
-<div id="container">
+
+<!-- Loading -->
+<div id="loading-container" *ngIf="boardState === BoardState.LOADING">
+  <mat-spinner></mat-spinner>
+</div>
+
+<!-- Ask reload dialog -->
+<div id="ask-dialog" *ngIf="boardState === BoardState.ASK_RELOAD">
+  <div id="ask-dialog-text">
+    There is a new set of souns. Would you like to reload the board?
+  </div>
+  <div id="ask-dialog-buttons">
+    <button mat-raised-button (click)="onAskBack()" class="header-text-button">
+      Back
+    </button>
+    <button
+      mat-raised-button
+      (click)="onAskReload()"
+      color="primary"
+      class="header-text-button"
+    >
+      Reload
+    </button>
+  </div>
+</div>
+
+<!-- Board content -->
+<div id="container" *ngIf="boardState === BoardState.CONTENT">
   <div *ngFor="let soundData of sounds">
     <mat-card
       (click)="onSelectSound(soundData)"
@@ -46,7 +73,7 @@
       <mat-card-header>
         <mat-card-title>{{ soundData.name }}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{ soundData.imageUrl }}" />
+      <img mat-card-image src="{{ soundData.icon }}" />
       <mat-card-content>
         <p>Price: {{ soundData.price }}€</p>
       </mat-card-content>

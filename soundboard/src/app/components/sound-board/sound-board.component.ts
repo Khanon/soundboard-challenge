@@ -3,6 +3,8 @@ import { ThemePalette } from '@angular/material/core';
 
 import { SoundData } from '../../models/sound-data';
 import { SoundControllerService } from '../../services/sound-controller.service';
+import { BoardState } from '../../models/board-state';
+import { CoreService } from '../../services/core.service';
 
 @Component({
   selector: 'app-sound-board',
@@ -10,105 +12,42 @@ import { SoundControllerService } from '../../services/sound-controller.service'
   styleUrls: ['./sound-board.component.scss'],
 })
 export class SoundBoardComponent implements OnInit {
-  sounds: SoundData[] = [
-    {
-      id: 0,
-      name: 'test0',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 1,
-      name: 'test1',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 2,
-      name: 'test2',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 3,
-      name: 'test3',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 4,
-      name: 'test4',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 5,
-      name: 'test5',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 6,
-      name: 'test6',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 7,
-      name: 'test7',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 8,
-      name: 'test8',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 9,
-      name: 'test9',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 10,
-      name: 'test10',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 11,
-      name: 'test11',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 12,
-      name: 'test12',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-    {
-      id: 13,
-      name: 'test13',
-      imageUrl: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
-      price: 10.01,
-    },
-  ];
+  sounds: SoundData[] = [];
   soundSelected: SoundData;
+  boardState: BoardState;
+  BoardState = BoardState;
 
   selectorColor: ThemePalette = 'primary';
-
   selectorShortcuts = false;
   selectorMute = false;
 
-  constructor(private soundController: SoundControllerService) {}
+  constructor(
+    private readonly soundController: SoundControllerService,
+    private readonly coreService: CoreService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadContent();
+  }
 
   onSelectSound(soundData: SoundData) {
     this.soundSelected = soundData;
     this.soundController.selectSound(this.soundSelected);
+  }
+
+  loadContent() {
+    this.boardState = BoardState.LOADING;
+  }
+
+  askReload() {
+    this.boardState = BoardState.ASK_RELOAD;
+  }
+
+  onAskBack() {
+    this.boardState = BoardState.CONTENT;
+  }
+
+  onAskReload() {
+    this.loadContent();
   }
 }

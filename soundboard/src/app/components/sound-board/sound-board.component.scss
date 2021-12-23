@@ -2,6 +2,8 @@
     display: block;
     width: 100%;
     height: 100%;
+    position: relative;
+    background-color: black;
 }
 
 #header {
@@ -50,9 +52,51 @@ section {
     overflow: auto;
 }
 
+#loading-container {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(25, 25, 25);
+    display: flex;
+    justify-content: center;
+    padding-top: 25%;
+}
+
+#ask-dialog {
+    width: 50%;
+    height: 200px;
+    background-color: #a4a4a4;
+    position: absolute;
+    left: 25%;
+    top: 30%;
+    -moz-box-shadow: 3px 3px 5px #535353;
+    -webkit-box-shadow: 3px 3px 5px #535353;
+    box-shadow: 3px 3px 5px #535353;
+    -moz-border-radius: 6px 6px 6px 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px 6px 6px 6px;
+}
+
+#ask-dialog-text {
+    font-size: 20px;
+    font-family: 'roadgeek';
+    text-align: center;
+    padding: 10%;
+}
+
+#ask-dialog-buttons {
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#ask-dialog-buttons button {
+    font-size: 20px;
+}
+
 .card {
-    max-width: 200px;
-    margin: 40px;
+    width: 150px;
+    margin: 20px;
 }
 
 mat-card:hover .selection {
