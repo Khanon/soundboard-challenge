@@ -13,7 +13,6 @@ export class SoundDetailsComponent implements OnInit {
   soundSelected: SoundData;
   volumeValue = 50;
   toneValue = 10;
-
   sliderColor: ThemePalette = 'primary';
   autoTicks = false;
   disabled = false;
