@@ -12,7 +12,92 @@ import { CoreService } from '../../services/core.service';
   styleUrls: ['./sound-board.component.scss'],
 })
 export class SoundBoardComponent implements OnInit {
-  sounds: SoundData[] = [];
+  sounds: SoundData[] = [
+    {
+      id: 0,
+      name: 'Camera',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon1.jpg',
+      price: 1.99,
+      playbacks: 0,
+    },
+    {
+      id: 1,
+      name: 'Clothes',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon2.jpg',
+      price: 1.99,
+      playbacks: 0,
+    },
+    {
+      id: 2,
+      name: 'Glasses',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon3.jpg',
+      price: 1.99,
+      playbacks: 0,
+    },
+    {
+      id: 3,
+      name: 'Ice cream',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon4.jpg',
+      price: 1.99,
+      playbacks: 0,
+    },
+    {
+      id: 4,
+      name: 'Coffee',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon5.jpg',
+      price: 1.99,
+      playbacks: 0,
+    },
+    {
+      id: 5,
+      name: 'Cactus',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon6.jpg',
+      price: 1.99,
+      playbacks: 0,
+    },
+    {
+      id: 6,
+      name: 'Headphones',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon7.jpg',
+      price: 1.99,
+      playbacks: 0,
+    },
+    {
+      id: 7,
+      name: 'Book',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon8.jpg',
+      price: 1.99,
+      playbacks: 0,
+    },
+    {
+      id: 8,
+      name: 'Cat',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon9.jpg',
+      price: 2,
+      playbacks: 0,
+    },
+    {
+      id: 9,
+      name: 'Megaphone',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon10.jpg',
+      price: 2,
+      playbacks: 0,
+    },
+    {
+      id: 10,
+      name: 'Controller',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon11.jpg',
+      price: 1,
+      playbacks: 0,
+    },
+    {
+      id: 11,
+      name: 'Shoes',
+      icon: 'https://www.khanon3d.com/cors-allowed/icon12.jpg',
+      price: 1,
+      playbacks: 0,
+    },
+  ];
   soundSelected: SoundData;
   boardState: BoardState;
   BoardState = BoardState;
@@ -27,7 +112,8 @@ export class SoundBoardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadContent();
+    this.boardState = BoardState.CONTENT; // TODO
+    // this.loadContent();
   }
 
   onSelectSound(soundData: SoundData) {
