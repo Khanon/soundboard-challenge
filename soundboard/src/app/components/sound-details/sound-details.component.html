@@ -1,8 +1,61 @@
 <div id="container">
-  <!-- <button mat-flat-button>Basic</button>
-        <button mat-flat-button color="primary">Primary</button>
-        <button mat-flat-button color="accent">Accent</button>
-        <button mat-flat-button color="warn">Warn</button>
-        <button mat-flat-button disabled>Disabled</button>
-        <a mat-flat-button href="https://www.google.com/" target="_blank">Link</a> -->
+  <!-- No sound text -->
+  <div id="no-sound" *ngIf="!soundSelected">No sound selected</div>
+  <!-- Sound details -->
+  <div if="sound-container" *ngIf="soundSelected">
+    <div id="sound-name">{{ soundSelected.name }}</div>
+    <div id="sound-image">
+      <img src="{{ soundSelected.imageUrl }}" />
+    </div>
+    <div class="label-container label-horizontal">
+      <label id="name-label" class="name-label">Volume: </label>
+      <label class="value-label">{{ volumeValue }}</label>
+    </div>
+    <mat-slider
+      [color]="sliderColor"
+      [disabled]="disabled"
+      [invert]="invert"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [thumbLabel]="thumbLabel"
+      [tickInterval]="getSliderTickInterval()"
+      [vertical]="vertical"
+      [(ngModel)]="volumeValue"
+      aria-labelledby="name-label"
+    >
+    </mat-slider>
+    <div class="label-container label-horizontal">
+      <label id="name-label" class="name-label">Tone: </label>
+      <label class="value-label">{{ toneValue }}</label>
+    </div>
+    <mat-slider
+      [color]="sliderColor"
+      [disabled]="disabled"
+      [invert]="invert"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [thumbLabel]="thumbLabel"
+      [tickInterval]="getSliderTickInterval()"
+      [vertical]="vertical"
+      [(ngModel)]="toneValue"
+      aria-labelledby="name-label"
+    >
+    </mat-slider>
+    <div id="buttons-container">
+      <button mat-icon-button color="accent" class="footer-button">
+        <mat-icon>credit_card</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" class="footer-button">
+        <mat-icon>eject</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" class="footer-button">
+        <mat-icon>share</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" class="footer-button">
+        <mat-icon>favorite</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>

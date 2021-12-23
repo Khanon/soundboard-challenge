@@ -3,3 +3,51 @@
     height: 100%;
     background-color: rgb(42, 42, 42);
 }
+
+#no-sound {
+    font-family: "roadgeek";
+    font-size: 40px;
+    line-height: 40px;
+    padding-top: 50px;
+    text-align: center;
+}
+
+#sound-name {
+    font-family: "roadgeek";
+    font-size: 25px;
+    line-height: 25px;
+    color: white;
+    padding-top: 40px;
+    text-align: center;
+}
+
+#sound-image img {
+    max-width: 200px;
+    margin-left: 10px;
+    margin-top: 19px;
+    margin-bottom: 50px;
+}
+
+.label-container {
+    font-family: "roadgeek";
+    font-size: 20px;
+    line-height: 20px;
+    color: white;
+    text-align: center;
+}
+
+.mat-slider-horizontal {
+    margin-left: 15px;
+    width: 190px;
+}
+
+.result-card .label-container.label-horizontal {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 12px 16px;
+    max-width: 284px;
+}
+
+#buttons-container {
+    margin-left: 30px;
+}
