@@ -1,0 +1,27 @@
+#container {
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    background-color: black;
+    height: 40px;
+}
+
+#title {
+    width: 15%;
+    color: white;
+    line-height: 40px;
+    margin-left: 20px;
+    font-family: "roadgeek";
+    font-size: 20px;
+}
+
+#logo-container {
+    text-align: center;
+    width: 60%;
+}
+
+
+#logo-container img {
+    height: 20px;
+    margin-top: 10px;
+}

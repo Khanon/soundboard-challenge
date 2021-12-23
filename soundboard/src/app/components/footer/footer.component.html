@@ -1,0 +1,39 @@
+<div id="container">
+  <section>
+    <mat-slide-toggle
+      class="slider"
+      [color]="selectorColor"
+      [checked]="selectorListenMyself"
+    >
+      LISTEN MYSELF
+    </mat-slide-toggle>
+    <mat-slide-toggle
+      class="slider"
+      [color]="selectorColor"
+      [checked]="selectorVoiceChanger"
+    >
+      VOICE CHANGER
+    </mat-slide-toggle>
+    <mat-slide-toggle
+      class="slider"
+      [color]="selectorColor"
+      [checked]="selectorBackgroundFx"
+    >
+      BCKGROUND FX
+    </mat-slide-toggle>
+  </section>
+  <section class="section-right">
+    <button mat-icon-button color="accent" class="footer-button">
+      <mat-icon>settings_voice</mat-icon>
+    </button>
+    <button mat-icon-button color="accent" class="footer-button">
+      <mat-icon>speaker</mat-icon>
+    </button>
+    <button mat-icon-button color="accent" class="footer-button">
+      <mat-icon>speaker_notes</mat-icon>
+    </button>
+    <button mat-icon-button color="primary" class="footer-button">
+      <mat-icon>mobile_friendly</mat-icon>
+    </button>
+  </section>
+</div>

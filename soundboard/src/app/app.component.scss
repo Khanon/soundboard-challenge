@@ -1,0 +1,13 @@
+#app {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#middle-container {
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
