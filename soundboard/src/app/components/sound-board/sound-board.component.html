@@ -75,7 +75,7 @@
       </mat-card-header>
       <img mat-card-image src="{{ soundData.icon }}" />
       <mat-card-content>
-        <p>Price: {{ soundData.price }}€</p>
+        <p>Price: {{ soundData.price.toFixed(2) }}€</p>
       </mat-card-content>
       <mat-card-actions>
         <button (click)="onPlayback(soundData.id)" mat-button>PLAY</button>

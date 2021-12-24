@@ -3,6 +3,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { DataBaseService } from '../database/database.service';
 import { SoundData } from '../models/sound-data';
 import { WSGateway } from '../websocket/websocket.gateway';
+import { SoundPlayback } from '../models/sound-playback';
 
 @Injectable()
 export class ApiService {
@@ -29,8 +30,8 @@ export class ApiService {
     return this.database.getSoundDetails(soundId);
   }
 
-  playSound(soundId: number): void {
-    this.database.incSoundPlayback(soundId);
+  playSound(soundId: number): SoundPlayback | undefined {
+    return this.database.incSoundPlayback(soundId);
   }
 
   private validatePostSoundsBody(data: any[]): Boolean {

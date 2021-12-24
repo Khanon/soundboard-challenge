@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import { switchMap, catchError } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 
 import { SoundData } from '../../../../server/src/models/sound-data';
 import { Config } from '../../env-config';
 import { SoundPlayback } from '../models/sound-playback';
+import { Logger } from '../models/logger';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +14,12 @@ import { SoundPlayback } from '../models/sound-playback';
 export class ApiCommsService {
   onNewSoundsPrice$: BehaviorSubject<SoundPlayback>;
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   getSounds(): Observable<SoundData[]> {
+    Logger.info(
+      `Fetch GET Request: ${Config.serverUrl}:${Config.serverPort}/sounds`
+    );
     return fromFetch(`${Config.serverUrl}:${Config.serverPort}/sounds`).pipe(
       switchMap((response) => {
         if (response.ok) {
@@ -32,35 +35,31 @@ export class ApiCommsService {
     );
   }
 
-  playbackSound(soundId: number): void {
-    this.http
-      .put('https://jsonplaceholder.typicode.com/posts/1', {})
-      .subscribe((data) => {
-        // console.log('aki data', data);
-        // this.onNewSoundsPrice$.next({data.id, data.price}
-      });
-
-    /*this.http.put<any>(`${Config.serverUrl}:${Config.serverPort}/sounds/${soundId}/play`,
-        {})
-    .subscribe(soundPlayback => this.onNewSoundsPrice$.next({soundPlayback.id, soundPlayback.price}));*/
-
-    /*this.http
-      .put(
-        `${Config.serverUrl}:${Config.serverPort}/sounds/${soundId}/play`,
-        {}
-      )
-      .subscribe((response) => {
+  playbackSound(soundId: number): Observable<SoundPlayback | undefined> {
+    Logger.info(
+      `Fetch PUT Request: ${Config.serverUrl}:${Config.serverPort}/sounds/${soundId}/play`
+    );
+    return fromFetch(
+      `${Config.serverUrl}:${Config.serverPort}/sounds/${soundId}/play`,
+      { method: 'PUT' }
+    ).pipe(
+      switchMap((response) => {
         if (response.ok) {
-          response.json();
-          this.onNewSoundsPrice$.next(soundPlayback.id, soundPlayback.price);
+          return response.json();
+        } else {
+          return of({ error: true, message: `Error ${response.status}` });
         }
-      });*/
+      }),
+      catchError((err) => {
+        console.error(err);
+        throw of({ error: true, message: err.message });
+      })
+    );
   }
 
   getSoundDetails(soundId: number): Observable<SoundData> {
-    console.log(
-      'aki getSoundDetails:',
-      `${Config.serverUrl}:${Config.serverPort}/sounds/${soundId}`
+    Logger.info(
+      `Fetch GET Request: ${Config.serverUrl}:${Config.serverPort}/sounds/${soundId}`
     );
     return fromFetch(
       `${Config.serverUrl}:${Config.serverPort}/sounds/${soundId}`

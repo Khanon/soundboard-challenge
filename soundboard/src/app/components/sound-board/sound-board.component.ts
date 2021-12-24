@@ -8,7 +8,7 @@ import { BoardState } from '../../models/board-state';
 import { CoreService } from '../../services/core.service';
 import { SocketService } from '../../services/socket.service';
 import { ApiCommsService } from '../../services/api-comms.service';
-import { SoundPlayback } from '../../models/sound-playback';
+import { Logger } from '../../models/logger';
 
 @Component({
   selector: 'app-sound-board',
@@ -45,6 +45,7 @@ export class SoundBoardComponent implements OnInit {
       this.onNewSoundsData$ = this.socketService
         .onNewSoundsData()
         .subscribe((newData: boolean) => {
+          Logger.info('New content on server.');
           this.askReload();
         });
     } else {
@@ -59,9 +60,16 @@ export class SoundBoardComponent implements OnInit {
 
   loadContent() {
     this.boardState = BoardState.LOADING;
-    this.apiCommsService.getSounds().subscribe((soundsData: SoundData[]) => {
-      this.sounds = [...soundsData];
-      this.boardState = BoardState.CONTENT;
+    this.apiCommsService.getSounds().subscribe({
+      next: (soundsData: SoundData[]) => {
+        Logger.info('Content loaded.');
+        this.sounds = [...soundsData];
+        this.boardState = BoardState.CONTENT;
+      },
+      error: () => {
+        Logger.warn('Load content connection rejected! Check server status.');
+        setTimeout(() => this.loadContent(), 1000);
+      },
     });
   }
 
@@ -78,8 +86,15 @@ export class SoundBoardComponent implements OnInit {
   }
 
   onPlayback(soundId: number): void {
-    // this.apiCommsService.playbackSound(soundId).subscribe((SoundPlayback) => {
-    //   this.onNewSoundsPrice$.next();
-    // });
+    this.apiCommsService.playbackSound(soundId).subscribe((soundPlayback) => {
+      if (soundPlayback) {
+        const sound = this.sounds.find(
+          (sound) => sound.id === soundPlayback.id
+        );
+        if (sound) {
+          sound.price = soundPlayback.price;
+        }
+      }
+    });
   }
 }

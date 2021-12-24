@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { SoundData } from '../models/sound-data';
+import { SoundPlayback } from '../models/sound-playback';
 
 @Injectable()
 export class DataBaseService {
@@ -104,7 +105,7 @@ export class DataBaseService {
     this.soundsData = [];
     soundData.forEach((data) => {
       const newData: SoundData = {
-        id: data.id,
+        id: Number(data.id),
         name: data.name,
         icon: data.icon,
         price: 1.99,
@@ -114,11 +115,17 @@ export class DataBaseService {
     });
   }
 
-  incSoundPlayback(soundId: number): void {
+  incSoundPlayback(soundId: number): SoundPlayback | undefined {
     const sound = this.getSoundDetails(soundId);
     if (sound) {
       sound.playbacks++;
       sound.price += 0.01;
+      return {
+        id: sound.id,
+        price: sound.price,
+      };
+    } else {
+      return undefined;
     }
   }
 }

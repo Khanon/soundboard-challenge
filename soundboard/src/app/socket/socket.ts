@@ -1,10 +1,11 @@
-import { SocketBase, SocketEvents } from '../models/socket.events';
+import { SocketBase, SocketEvents } from '../models/socket-events';
+import { Logger } from '../models/logger';
 
 export class SocketNgx extends SocketBase {
   constructor(url: string, port: string) {
     const targetUrl = `${url}:${port}`;
     super({ url: targetUrl, options: {} });
-    console.log(`Socket: Ngx socket, Connecting to ${targetUrl}.`);
+    Logger.info(`Socket: Ngx socket, Connecting to ${targetUrl}.`);
 
     // Events
     this.fromEvent<void>(SocketEvents.ON_CONNECTED).subscribe((msg) => {
@@ -16,13 +17,15 @@ export class SocketNgx extends SocketBase {
     return this.pConnected;
   }
 
+  // Handlke on connection
   onConnected() {
-    // Handlke on connection
+    Logger.info('Socket: Connected.');
     this.pConnected = true;
   }
 
+  // Handlke on disconnection
   onDisconnected() {
-    // Handlke on disconnection
+    Logger.info('Socket: Disconnected!');
     this.pConnected = false;
   }
 }

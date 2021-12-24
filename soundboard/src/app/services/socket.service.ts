@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SocketNgx } from '../socket/socket';
-import { SocketEvents, SocketBase } from '../models/socket.events';
+import { SocketEvents, SocketBase } from '../models/socket-events';
 
 @Injectable({
   providedIn: 'root',
