@@ -8,18 +8,18 @@ import {
 
 @WebSocketGateway()
 export class WSGateway implements OnGatewayConnection, OnGatewayDisconnect {
-  private clients: any[];
+  private clients: any[] = [];
 
   constructor() {}
 
   @WebSocketServer() server;
 
   async handleConnection(client) {
-    console.log('aki CONNECTED!');
-    const clientExists = this.clients.find((_client) => _client === client);
+    const clientExists = this.clients?.find((_client) => _client === client);
+    client.emit(SocketEvents.ON_CONNECTED);
     // Handle new connection
     if (!clientExists) {
-      this.clients.push(clientExists);
+      this.clients.push(client);
     }
   }
 

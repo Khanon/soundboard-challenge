@@ -43,7 +43,7 @@
 <!-- Ask reload dialog -->
 <div id="ask-dialog" *ngIf="boardState === BoardState.ASK_RELOAD">
   <div id="ask-dialog-text">
-    There is a new set of souns. Would you like to reload the board?
+    There is a new set of sounds. Would you like to reload the board?
   </div>
   <div id="ask-dialog-buttons">
     <button mat-raised-button (click)="onAskBack()" class="header-text-button">
@@ -78,7 +78,7 @@
         <p>Price: {{ soundData.price }}€</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button>PLAY</button>
+        <button (click)="onPlayback(soundData.id)" mat-button>PLAY</button>
         <button mat-icon-button>
           <mat-icon>delete</mat-icon>
         </button>

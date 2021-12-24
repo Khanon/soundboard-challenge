@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { SocketNgx } from '../socket/socket';
-import { SocketBase } from '../models/socket.events';
 import { Config } from '../../env-config';
+import { SocketService } from './socket.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoreService {
-  public socket: SocketBase;
-
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private readonly socket: SocketService
+  ) {
     this.init();
   }
 
@@ -25,9 +25,7 @@ export class CoreService {
    * it must wait to get the environment settings ('url' and 'port').
    */
   initSocket(): void {
-    console.log('aki INIT SOCKET', Config.serverUrl, Config.serverPort);
-    // Socket Ngx
-    this.socket = new SocketNgx(Config.serverUrl, Config.serverPort);
+    this.socket.initSocket(Config.serverUrl, Config.serverPort);
   }
 
   isSocketConnected(): boolean {
