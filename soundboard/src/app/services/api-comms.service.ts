@@ -3,7 +3,7 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
 import { switchMap, catchError } from 'rxjs/operators';
 
-import { SoundData } from '../../../../server/src/models/sound-data';
+import { SoundData } from '../models/sound-data';
 import { Config } from '../../env-config';
 import { SoundPlayback } from '../models/sound-playback';
 import { Logger } from '../models/logger';
