@@ -29,7 +29,7 @@ Test server requests using you prefer API platform (E.g: Postman).
 
 On **POST** Request **'/sounds'**, the *server* stores the new sounds data and it will notify to the *Web Client* there's new sounds data through WebSocket. At this point *Web Client* will ask the user to reload the content.
 
-On **sound play**, server gets notified through **PUT** Request **/sounds/10/play** and will send back the new sound's price.
+On **sound play**, server gets notified through **PUT** Request **/sounds/:id/play** and will send back the new sound's price.
 
 ### NOTES
 <ul>
